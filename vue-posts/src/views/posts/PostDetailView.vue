@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h2>{{ form.title }}</h2>
-        <p>{{ form.content }}</p>
-        <div class="text-muted">{{ form.createdAt }}</div>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content }}</p>
+        <div class="text-muted">{{ post.createdAt }}</div>
         <hr class="my-4" />
         <div class="row g-2">
             <div class="col-auto">
@@ -37,12 +37,19 @@ const props = defineProps({
 
 const router = useRouter();
 //const id = route.params.id;
-const form = ref({});
+const post = ref({});
 
-const fetchPost = () =>{
-    const data = getPostById(props.id);
-    form.value = {...data};
+const fetchPost = async() =>{
+    const {data} = await getPostById(props.id);
+    setPost(data);
 }
+
+const setPost = (title, content, createAt) =>{
+    post.value.title = title;
+    post.value.content = content;
+    post.value.createAt = createAt;
+}
+
 fetchPost();
 
 const goListPage = () =>{
