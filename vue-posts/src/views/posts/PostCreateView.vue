@@ -39,7 +39,7 @@ const save = () =>{
         }); 
         router.push({name: 'PostList'});
     }catch(error){
-        console.log(error);
+        console.error(error);
     }
 
     
